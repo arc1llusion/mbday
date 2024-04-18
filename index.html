@@ -22,7 +22,8 @@
     @media (max-width: 600px) {
         #main { 
             width: 100%;
-            height: 100%;
+            height: 100vh;
+            max-height: 640px;
             background-color: aliceblue;
         }
         
@@ -88,6 +89,10 @@
     .collage-image {
         width: 150%;
     }
+
+    .hidden-collage {
+        visibility: hidden;
+    }
 </style>
 </head>
 <body>
@@ -98,6 +103,7 @@
         <div class="collage-container"></div>
         <div class="main-text"></div>
         <div class="hidden-text"></div>
+        <div class="hidden-collage"></div>
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -136,7 +142,7 @@
                 content: "With Days of hope, assurance, and surprise",
                 type: "collage",
                 path: "Pics/Assurances",
-                count: 35
+                count: 46
             },
             {
                 content: "Forever lasting friendship is my prize",
@@ -304,10 +310,20 @@
             let width = $('#main').width();
             let height = $('#main').height();
 
-            let top = Math.round(Math.random() * height) - 50;
-            let left = Math.round(Math.random() * width) - 150;
-
             clearTimeout(collageTimer);
+
+            let hiddenImage = $('<img src="' + collageImages[collageIndex] + '" />')
+            $('.hidden-collage').append(hiddenImage);
+
+            let res = $('.hidden-collage').children().first();
+            let hWidth = res.width();
+            let hHeight = res.height();
+
+            let randomWidth = hWidth > width ? 0 : (width - hWidth)
+            let randomHeight = height - hHeight;
+
+            let top = Math.round(Math.random() * randomHeight);
+            let left = Math.round(Math.random() * randomWidth);
 
             let collageImage = $('<img class="collage-image" id="collage-' + collageIndex + '" style="position: absolute; top: ' + top + 'px; left: ' + left + 'px; " src="' + collageImages[collageIndex] + '"></div>"')
             $('.collage-container').append(collageImage);
@@ -316,6 +332,12 @@
 
             if(collageIndex < collageImages.length) {
                 setTimeout(nextCollageImage, 50);
+            }
+
+            let children = $('.hidden-collage').children();
+
+            for(let i = 0; i < children.length; ++i) {
+                children[i].remove();
             }
         }
 
@@ -390,6 +412,17 @@
     <img src="Pics/Assurances/32.PNG" />
     <img src="Pics/Assurances/33.PNG" />
     <img src="Pics/Assurances/34.PNG" />  
+    <img src="Pics/Assurances/35.PNG" />  
+    <img src="Pics/Assurances/36.PNG" />  
+    <img src="Pics/Assurances/37.PNG" />  
+    <img src="Pics/Assurances/38.PNG" />  
+    <img src="Pics/Assurances/39.PNG" />  
+    <img src="Pics/Assurances/40.PNG" />  
+    <img src="Pics/Assurances/41.PNG" />  
+    <img src="Pics/Assurances/42.PNG" />  
+    <img src="Pics/Assurances/43.PNG" />  
+    <img src="Pics/Assurances/44.PNG" />  
+    <img src="Pics/Assurances/45.PNG" />  
 
 </div>
 </body>
